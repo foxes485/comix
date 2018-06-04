@@ -27,9 +27,9 @@ class Slideshow:
             self._window.update_title()
 
     def _next(self):
-        if self._window.file_handler.is_last_page():
-            self._window.actiongroup.get_action('slideshow').set_active(False)
-            return False
+        #if self._window.file_handler.is_last_page():
+        #    self._window.actiongroup.get_action('slideshow').set_active(False)
+        #    return False
         self._window.next_page()
         return True
 

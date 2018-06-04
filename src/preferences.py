@@ -21,6 +21,7 @@ prefs = {
     'page of last file': 1,
     'path to last file': '',
     'auto open next archive': True,
+    'random image': True,
     'bg colour': (5000, 5000, 5000),
     'checkered bg for transparent images': True,
     'cache': True,
@@ -215,6 +216,14 @@ class _PreferencesDialog(gtk.Dialog):
         auto_open_next_button.set_tooltip_text(
             _('Automatically open the next archive in the directory when flipping past the last page, or the previous archive when flipping past the first page.'))
         page.add_row(auto_open_next_button)
+        random_image_button = gtk.CheckButton(
+            _('Random open files'))
+        random_image_button.set_active(prefs['random image'])
+        random_image_button.connect('toggled', self._check_button_cb,
+            'random image')
+        random_image_button.set_tooltip_text(
+            _('Random open image files'))
+        page.add_row(random_image_button)
         auto_open_last_button = gtk.CheckButton(
             _('Automatically open the last viewed file on startup.'))
         auto_open_last_button.set_active(prefs['auto load last file'])

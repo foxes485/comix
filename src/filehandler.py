@@ -18,6 +18,7 @@ import encoding
 import image
 from preferences import prefs
 import thumbnail
+from random import shuffle
 
 
 class FileHandler:
@@ -117,6 +118,9 @@ class FileHandler:
             if (prefs['auto open next archive'] and 
               self.archive_type is not None):
                 self._open_next_archive()
+            else:
+                self._current_image_index = 0
+                return True
             return False
         self._current_image_index += self._get_forward_step_length()
         return old_page != self.get_current_page()
@@ -131,6 +135,9 @@ class FileHandler:
             if (prefs['auto open next archive'] and
               self.archive_type is not None):
                 self._open_previous_archive()
+            else:
+                self._current_image_index = self.get_number_of_pages() - 1
+                return True
             return False
         old_page = self.get_current_page()
         step = self._get_backward_step_length()
@@ -237,7 +244,10 @@ class FileHandler:
             self._condition = self._extractor.setup(path, self._tmp_dir)
             files = self._extractor.get_files()
             image_files = filter(self._image_re.search, files)
-            alphanumeric_sort(image_files)
+            if (prefs['random image']):
+                shuffle(image_files)
+            else:
+                alphanumeric_sort(image_files)
             self._image_files = \
                 [os.path.join(self._tmp_dir, f) for f in image_files]
             comment_files = filter(self._comment_re.search, files)
@@ -278,7 +288,10 @@ class FileHandler:
                 fpath = os.path.join(self._base_path, f)
                 if is_image_file(fpath):
                     self._image_files.append(fpath)
-            self._image_files.sort(locale.strcoll)
+            if (prefs['random image']):
+                shuffle(self._image_files)
+            else:
+                self._image_files.sort(locale.strcoll)
             self._current_image_index = self._image_files.index(path)
 
         if not self._image_files:

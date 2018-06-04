@@ -676,6 +676,14 @@ msgstr "自動開啟下一個壓縮檔。"
 msgid "Automatically open the next archive in the directory when flipping past the last page, or the previous archive when flipping past the first page."
 msgstr "當在目前壓縮檔翻頁離開最後一頁時，自動開啟目錄中的下一個壓縮檔；當翻頁跳出第一頁時，則自動開啟上一個壓縮檔。"
 
+#: src/preferences.py:220
+msgid "Random open files"
+msgstr "隨機開啟檔案"
+
+#: src/preferences.py:225
+msgid "Random open image files"
+msgstr "隨機開啟檔案"
+
 #: src/preferences.py:217
 msgid "Automatically open the last viewed file on startup."
 msgstr "啟動時自動開啟最後檢視的檔案。"
